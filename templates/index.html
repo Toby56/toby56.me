@@ -4,18 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toby56.me</title>
+    <title>Toby56</title>
 
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ static_url }}/style.css">
 </head>
 
-<body>
-    <header>
-        <h1>TOBY56.ME</h1>
+<body class="{% if index %}index{% endif %}">
+    <header id="header">
+        <h1><a href="/">Toby56</a><span> ~~&gt; Hello world</span></h1>
+        <p>
+            Testing testing testing~<br>
+        </p>
     </header>
+
+    <div id="content-list">
+        <h1>Pages:</h1>
+        <ul>
+            {% for item in content_list %}
+            <li><a href="/page/{{ item }}">{{ item }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% if index %}
     <div id="content"></div>
+    {% else %}
+    <div id="content">{{ content }}</div>
+    {% endif %}
 </body>
 
-<script src="/static/script.js"></script>
+<script src="{{ static_url }}/script.js"></script>
 
 </html>
