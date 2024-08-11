@@ -1,9 +1,38 @@
+let keyframes = []
+
+for (let i = 0; i < 4; i++) {
+    keyframes = [...keyframes,
+    { translateX: 18.3, duration: 1000 },
+    { translateX: 0, duration: 0 }
+    ];
+}
+
+let wiggleAnimation = anime({
+    targets: '#wiggle',
+    keyframes: keyframes,
+    duration: 1000,
+    easing: 'linear',
+    autoplay: false
+});
+var animationSeek = { progress: 0 }
+
+var widdleAnimationAnimation = anime({
+    targets: animationSeek,
+    progress: 1000 * 4,
+    duration: 1000 * 4,
+    easing: 'easeOutQuint',
+    update: function () {
+        wiggleAnimation.seek(animationSeek.progress)
+    }
+});
+
 async function navigate(path) {
-    console.log("New: " + path + "\nOld: " + window.location.pathname)
     if (path == "/") {
         document.getElementById("content").innerHTML = "";
 
         document.body.classList.add("index");
+
+        widdleAnimationAnimation.restart();
     } else if (path.substring(0, 6) == "/page/") {
         contentName = path.substring(6)
 
@@ -13,7 +42,15 @@ async function navigate(path) {
         addClickHandlers();
 
         document.body.classList.remove("index");
-    }
+    } else { return }
+
+    let title = path.substring(6) || "Hello world"
+    title = (title[0].toUpperCase() + title.slice(1)).replaceAll("-", " ");
+
+    document.title = title
+    document.getElementById("title").innerText = title
+
+    navigatedPath = path;
 }
 
 async function handleClick(event) {
@@ -50,7 +87,7 @@ function app() {
     let lastUrl;
 
     setInterval(() => {
-        if (window.location.href != lastUrl) {
+        if (window.location.href != lastUrl && window.location.pathname != navigatedPath) {
             navigate(window.location.pathname)
 
             lastUrl = window.location.href;

@@ -1,9 +1,10 @@
 * {
-    font-family: 'Jetbrains Mono', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Iosevka', 'Jetbrains Mono', Tahoma, Geneva, Verdana, sans-serif;
+    font-stretch: expanded;
 }
 
 body {
-    margin: 150px 10%;
+    margin: 100px 10%;
 }
 
 body:not(.index)>#content-list,
@@ -17,12 +18,14 @@ header#header {
 
 header#header>h1 {
     font-size: 3.5em;
-    margin: 0.3em 0;
+    font-weight: 800;
+    margin: 0;
 }
 
 header#header>h1>span {
-    font-size: 0.6em;
+    font-size: 0.5em;
     opacity: 0.6;
+    font-weight: bold;
 }
 
 header#header>p {
@@ -39,4 +42,29 @@ img {
 a:not(:hover) {
     text-decoration: none;
     color: inherit;
+}
+
+#wiggle-arrow {
+    height: 16px;
+}
+
+p {
+    color: #444;
+}
+
+p>a {
+    color: black !important;
+}
+
+p>a::after {
+    content: "->";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 900;
 }
